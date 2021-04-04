@@ -1,0 +1,24 @@
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CarName</th>
+            <th>BrandName</th>
+            <th>ColorName</th>
+            <th>ModelYear</th>
+            <th>DailyPrice</th>
+            <th>Description</th>
+            
+        </tr>
+    </thead>
+    <tr (click)="setCurrentCarDto(carDto)" routerLink = "/cars/{{carDto.carId}}" *ngFor="let carDto of carDtos">
+        <td>{{carDto.carId}}</td>
+        <td>{{carDto.carName}}</td>
+        <td>{{carDto.brandName}}</td>
+        <td>{{carDto.colorName}}</td>
+        <td>{{carDto.modelYear}}</td>
+        <td>{{carDto.dailyPrice}}</td>
+        <td>{{carDto.description}}</td>
+
+    </tr>
+  </table>
