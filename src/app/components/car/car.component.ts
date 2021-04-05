@@ -22,8 +22,6 @@ export class CarComponent implements OnInit {
         this.getCarDtosByBrand(params["brandId"]);
       }else if(params["colorId"]){
         this.getCarDtosByColor(params["colorId"]);
-      }else if(params["carId"]){
-        this.getCarDtoById(params["carId"]);
       }else{
         this.getCarDtos();
       }
@@ -57,9 +55,5 @@ export class CarComponent implements OnInit {
   setCurrentCarDto(carDto:CarDto){
     this.currentCarDto = carDto;
   }
-  getCarDtoById(carId:number){
-    this.carService.getCarDtoById(carId).subscribe(response=>{
-      this.currentCarDto = response.data;
-    })
-  }
+  
 }

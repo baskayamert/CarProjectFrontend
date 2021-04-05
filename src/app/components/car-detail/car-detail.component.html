@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CarName</th>
+            <th>BrandName</th>
+            <th>ColorName</th>
+            <th>ModelYear</th>
+            <th>DailyPrice</th>
+            <th>Description</th>
+            
+        </tr>
+    </thead>
+    <tr>
+        <td>{{currentCarDto.carId}}</td>
+        <td>{{currentCarDto.carName}}</td>
+        <td>{{currentCarDto.brandName}}</td>
+        <td>{{currentCarDto.colorName}}</td>
+        <td>{{currentCarDto.modelYear}}</td>
+        <td>{{currentCarDto.dailyPrice}}</td>
+        <td>{{currentCarDto.description}}</td>
+    </tr>
+    <div *ngFor="let image of carImages">
+        
+        <img src="{{basePath}}{{image.imagePath}}" width="400px" height="250px" >
+        
+        
+
+    </div>
+
+    
+
+</table>

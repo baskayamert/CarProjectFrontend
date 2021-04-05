@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../models/car';
 import { CarDto } from '../models/carDto';
+import { CarImage } from '../models/carImage';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ObjectResponseModel } from '../models/objectResponseModel';
 
@@ -32,5 +33,9 @@ export class CarService {
   getCarDtoById(carId:number):Observable<ObjectResponseModel<CarDto>>{
     let newPath = this.apiUrl + "cars/getcardtobyid?carId=" + carId;
     return this.httpClient.get<ObjectResponseModel<CarDto>>(newPath);
+  }
+  getImageByCarId(carId:number):Observable<ListResponseModel<CarImage>>{
+    let newPath = this.apiUrl + "carimages/getimagesbycarid?carId=" + carId;
+    return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
 }
