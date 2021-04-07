@@ -15,6 +15,9 @@ export class CarDetailComponent implements OnInit {
   carImages:CarImage[] = [];
   newCarImage:CarImage;
   currentCarDto:CarDto;
+  rentalState= "";
+  startDate:Date;
+  finishDate:Date;
 
   constructor(private carService : CarService, private activatedRoute:ActivatedRoute) { }
 
@@ -31,6 +34,8 @@ export class CarDetailComponent implements OnInit {
   getCarDtoById(carId:number){
     this.carService.getCarDtoById(carId).subscribe(response=>{
       this.currentCarDto = response.data;
+      if(this.currentCarDto.rentalState) this.rentalState = "Available";
+      else this.rentalState = "Not available";
     });
   }
 

@@ -1,11 +1,7 @@
-<ul class="list-group">
-    <li (click) = "setCurrentBrand(brand)"
-    routerLink = "/cars/brand/{{brand.brandId}}"
-    *ngFor = "let brand of brands" [class]="getCurrentBrandClass(brand)">
-      {{brand.brandId}}
-      {{brand.name}}
-    </li>
-    
-  </ul>
-
-  <h5 *ngIf="currentBrand">You chose {{currentBrand.name}}</h5> 
+<label for="brands">Brands</label>
+<br>
+<select [(ngModel)]="selectedBrandId" name="brands" id="brands">
+  <option  *ngFor="let brand of brands" value="{{ brand.brandId }}">{{brand.name}}</option>
+</select>
+<br>
+<button routerLink = "/cars/brand/{{selectedBrandId}}" type="button" class="btn btn-info">Filter</button>

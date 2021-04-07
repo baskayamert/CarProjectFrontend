@@ -1,3 +1,4 @@
+
 <table class="table">
     <thead>
         <tr>
@@ -8,6 +9,7 @@
             <th>ModelYear</th>
             <th>DailyPrice</th>
             <th>Description</th>
+            <th>State</th>
             
         </tr>
     </thead>
@@ -19,15 +21,20 @@
         <td>{{currentCarDto.modelYear}}</td>
         <td>{{currentCarDto.dailyPrice}}</td>
         <td>{{currentCarDto.description}}</td>
+        <td>{{rentalState}}</td>
     </tr>
     <div *ngFor="let image of carImages">
         
         <img src="{{basePath}}{{image.imagePath}}" width="400px" height="250px" >
-        
-        
 
     </div>
 
     
-
 </table>
+    <label for="start">Start date:</label>
+    <input [(ngModel)]="startDate" type="date" id="start" name="trip-start"  required>
+      
+    <label for="finish">Finish date:</label>
+     <input [(ngModel)]="finishDate" type="date" id="finish" name="trip-finish"  required >
+     <br>
+     <button *ngIf="startDate && finishDate && startDate <= finishDate" routerLink = "/cars/{{currentCarDto.carId}}/payment" type="button" class="btn btn-info">Rent</button>

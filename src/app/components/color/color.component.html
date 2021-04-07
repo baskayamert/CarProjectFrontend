@@ -1,12 +1,8 @@
-<ul class="list-group">
-    <li (click) = "setCurrentColor(color)"
-     routerLink = "/cars/color/{{color.colorId}}"
-     *ngFor="let color of colors" 
-     [class]="getCurrentColorClass(color)">
-      {{color.colorId}}
-      {{color.name}}
-    </li>
-
-  </ul>
-
-  <h5 *ngIf = "currentColor">You chose {{currentColor.name}}</h5>
+<br>
+<label for="colors">Colors</label>
+<br>
+<select [(ngModel)]="selectedColorId" name="colors" id="colors">
+  <option  *ngFor="let color of colors" value ="{{ color.colorId }}">{{color.name}}</option>
+</select>
+<br>
+<button routerLink = "/cars/color/{{selectedColorId}}" type="button" class="btn btn-info">Filter</button>

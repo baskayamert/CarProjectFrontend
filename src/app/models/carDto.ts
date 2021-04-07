@@ -7,4 +7,5 @@ export interface CarDto{
     dailyPrice:number;
     description:string;
     imagePath:string;
+    rentalState:boolean;
 }

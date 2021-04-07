@@ -1,3 +1,10 @@
+<div class="mb-3">
+    <label for="filterText" class="form-label">Search Product</label>
+    <input type="text" [(ngModel)] ="filterText" class="form-control" id="filterText" placeholder="Search">
+  </div>
+  <div *ngIf = "filterText.length>2" class = "alert alert-success">
+      You searched {{filterText}}
+  </div>
 <table class = "table">
     <thead>
         <tr>
@@ -11,7 +18,7 @@
             
         </tr>
     </thead>
-    <tr (click)="setCurrentCarDto(carDto)" routerLink = "/cars/{{carDto.carId}}" *ngFor="let carDto of carDtos">
+    <tr (click)="setCurrentCarDto(carDto)" routerLink = "/cars/{{carDto.carId}}" *ngFor="let carDto of carDtos | filterPipe:filterText">
         <td>{{carDto.carId}}</td>
         <td>{{carDto.carName}}</td>
         <td>{{carDto.brandName}}</td>
