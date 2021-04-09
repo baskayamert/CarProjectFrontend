@@ -10,7 +10,7 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarUpdateComponent implements OnInit {
 
-  carUpdateForm : FormGroup;
+  carUpdateForm : FormGroup;//as
 
   constructor(private formBuilder: FormBuilder, private toastrService:ToastrService, private carService:CarService) { }
 
