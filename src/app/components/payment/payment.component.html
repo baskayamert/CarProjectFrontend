@@ -13,17 +13,20 @@
           </div>
         </div>
         <div class="panel-body">
-          <form role="form">
+          <form role="form" [formGroup]="creditCardAddForm">
             <div class="row">
               <div class="col-xs-12">
                 <div class="form-group">
-                  <label>CARD NUMBER</label>
+                  <label for="cardNumber">CARD NUMBER</label>
                   <div class="input-group">
-                    <input [(ngModel)]="cardNumber"
-                      type="tel"
+                    <input formControlName="cardNumber"
+                    id= "cardNumber"
+                      type="text"
                       class="form-control"
                       placeholder="Valid Card Number"
                       name="cardNumber"
+                      minlength="16"
+                      maxlength="16"
                     />
                     <span class="input-group-addon"
                       ><span class="fa fa-credit-card"></span
@@ -35,31 +38,35 @@
             <div class="row">
               <div class="col-xs-7 col-md-7">
                 <div class="form-group">
-                  <label
+                  <label for = "expirationDay"
                     ><span class="hidden-xs">EXPIRATION</span
                     ><span class="visible-xs-inline">EXP</span> DATE</label
                   >
-                  <input [(ngModel)]="expirationDate"
-                    type="tel"
+                  <input formControlName="expirationDate"
+                    type="text"
+                    id = "expirationDay"
+                    minlength="5"
+                    maxlength="5"
                     class="form-control"
-                    placeholder="MM / YY"
+                    placeholder="MM/YY"
                     name="expirationDate"
                   />
                 </div>
               </div>
               <div class="col-xs-5 col-md-5 pull-right">
                 <div class="form-group">
-                  <label>CV CODE</label>
-                  <input [(ngModel)]="cvc" type="tel" class="form-control" placeholder="CVC" name="cvc"/>
+                  <label for="cvc">CV CODE</label>
+                  <input formControlName="cvc" id="cvc" type="text" class="form-control" placeholder="CVC" minlength="3" maxlength="3" name="cvc"/>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
                 <div class="form-group">
-                  <label>CARD OWNER</label>
-                  <input [(ngModel)]="cardOwner"
+                  <label for="cardOwner">CARD OWNER</label>
+                  <input formControlName="cardOwner"
                     type="text"
+                    id="cardOwner"
                     class="form-control"
                     placeholder="Card Owner Names"
                     name="cardOwner"
@@ -72,7 +79,7 @@
         <div class="panel-footer">
           <div class="row">
             <div class="col-xs-12">
-              <button (click)="processPayment()" routerLink = "/cars" class="btn btn-warning btn-lg btn-block">
+              <button (click)="processPayment()" class="btn btn-warning btn-lg btn-block">
                 Process payment
               </button>
             </div>

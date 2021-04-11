@@ -8,4 +8,8 @@ export interface CarDto{
     description:string;
     imagePath:string;
     rentalState:boolean;
+    findexPoints:number;
+    brandId:number;
+    colorId:number;
+   
 }

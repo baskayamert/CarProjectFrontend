@@ -1,21 +1,22 @@
 <div class="content">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header"><h5 class="title">Add Car</h5></div>
+        <div class="card-header"><h5 class="title">Update Car</h5></div>
         <div class="card-body">
           <form [formGroup]="carUpdateForm">
             <div class="mb-3">
-                <label for="carId">Car Id</label>
-                <div class="form-group">
-                  <input
-                    type="number"
-                    id="carId"
-                    formControlName="carId"
-                    class="form-control"
-                    placeholder="Car id"
-                  />
-                </div>
+              <label for="carId">Car Id</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="carId"
+                  formControlName="carId"
+                  class="form-control"
+                  placeholder="{{currentCarDto.carId}}"
+                  readonly
+                />
               </div>
+            </div>
             <div class="mb-3">
               <label for="carName">Car Name</label>
               <div class="form-group">
@@ -37,6 +38,18 @@
                   formControlName="brandId"
                   class="form-control"
                   placeholder="Brand id"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="findexPoints">Findex Points</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="findexPoints"
+                  formControlName="findexPoints"
+                  class="form-control"
+                  placeholder="Findex Points"
                 />
               </div>
             </div>
@@ -103,7 +116,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <button class="btn btn-fill btn-primary" (click)="update()" >Ekle</button>
+          <button class="btn btn-fill btn-primary" (click)="update()" >Update</button>
         </div>
       </div>
     </div>

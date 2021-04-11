@@ -1,10 +1,15 @@
+<div align="center"  *ngFor="let image of carImages">
+        
+    <img src="{{basePath}}{{image.imagePath}}" width="400px" height="250px" >
 
+</div>
 <table class="table">
-    <thead>
+    
         <tr>
-            <th>Id</th>
+            
             <th>CarName</th>
             <th>BrandName</th>
+            <th>FindexPoints</th>
             <th>ColorName</th>
             <th>ModelYear</th>
             <th>DailyPrice</th>
@@ -12,22 +17,19 @@
             <th>State</th>
             
         </tr>
-    </thead>
+    
     <tr>
-        <td>{{currentCarDto.carId}}</td>
+       
         <td>{{currentCarDto.carName}}</td>
         <td>{{currentCarDto.brandName}}</td>
+        <td>{{currentCarDto.findexPoints}}</td>
         <td>{{currentCarDto.colorName}}</td>
         <td>{{currentCarDto.modelYear}}</td>
         <td>{{currentCarDto.dailyPrice}}</td>
         <td>{{currentCarDto.description}}</td>
         <td>{{rentalState}}</td>
     </tr>
-    <div *ngFor="let image of carImages">
-        
-        <img src="{{basePath}}{{image.imagePath}}" width="400px" height="250px" >
-
-    </div>
+    
 
     
 </table>
@@ -36,5 +38,9 @@
       
     <label for="finish">Finish date:</label>
      <input [(ngModel)]="finishDate" type="date" id="finish" name="trip-finish"  required >
-     <br>
-     <button *ngIf="startDate && finishDate && startDate <= finishDate" routerLink = "/cars/{{currentCarDto.carId}}/payment" type="button" class="btn btn-info">Rent</button>
+
+     <div align="center">
+         <br>
+        <button  (click) = "rentCheck()"  type="button" class="btn btn-info"><h2>Rent</h2></button>
+     </div>
+     

@@ -1,31 +1,80 @@
 <div class="mb-3">
-    <label for="filterText" class="form-label">Search Product</label>
-    <input type="text" [(ngModel)] ="filterText" class="form-control" id="filterText" placeholder="Search">
-  </div>
-  <div *ngIf = "filterText.length>2" class = "alert alert-success">
-      You searched {{filterText}}
-  </div>
-<table class = "table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>CarName</th>
-            <th>BrandName</th>
-            <th>ColorName</th>
-            <th>ModelYear</th>
-            <th>DailyPrice</th>
-            <th>Description</th>
-            
-        </tr>
-    </thead>
-    <tr (click)="setCurrentCarDto(carDto)" routerLink = "/cars/{{carDto.carId}}" *ngFor="let carDto of carDtos | filterPipe:filterText">
-        <td>{{carDto.carId}}</td>
-        <td>{{carDto.carName}}</td>
-        <td>{{carDto.brandName}}</td>
-        <td>{{carDto.colorName}}</td>
-        <td>{{carDto.modelYear}}</td>
-        <td>{{carDto.dailyPrice}}</td>
-        <td>{{carDto.description}}</td>
+  <label for="filterText" class="form-label">Search Product</label>
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Search"
+  />
+</div>
+<div *ngIf="filterText.length > 2" class="alert alert-success">
+  You searched {{ filterText }}
+</div>
 
-    </tr>
-  </table>
+<div class="container pb-5 mb-sm-1">
+  <!-- Categories grid-->
+  <div class="row">
+    <!-- Category-->
+    <div
+      *ngFor="let carDto of carDtos | filterPipe: filterText"
+      class="col-md-6 col-sm-4"
+    >
+      <div class="card border-0 mb-grid-gutter">
+        <a  routerLink = "/cars/{{carDto.carId}}">
+          <div  class="main-img">
+            <img 
+            src="{{basePath}}{{carDto.imagePath}}"
+              width="380px" height="290px"
+            />
+          </div>
+          
+        </a>
+        <div class="card-body border mt-n1 py-4 text-center">
+          <h2 class="h5 mb-1">{{ carDto.carName }}</h2>
+
+          <span class="d-block mb-3 font-size-xs text-muted"
+            ><span class="font-weight-semibold"
+              ><small>{{ carDto.brandName }}</small></span
+            ></span>
+          <span class="d-block mb-3 font-size-xs text-muted"
+            ><span class="font-weight-semibold"
+              ><small>{{ carDto.description }}</small></span
+            ></span>
+          <span class="d-block mb-3 font-size-xs text-muted"
+            ><span class="font-weight-semibold"
+              ><h2>{{ carDto.dailyPrice }}TL</h2></span
+            ></span
+          ><a
+            class="btn btn-pill btn-outline-primary btn-sm"
+            routerLink = "/cars/{{carDto.carId}}"
+            >See Details</a
+          >
+          
+          <div *ngIf="getRole()">
+            <br>
+            <a
+            class="btn btn-pill btn-outline-primary btn-sm"
+            routerLink = "/cars/update/{{carDto.carId}}"
+            >Update</a
+          >
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+            {{carDto.brandName}}
+            
+            {{carDto.findexPoints}}
+        {{carDto.colorName}}
+        {{carDto.modelYear}} 
+        
+ 
+
+-->
+
+

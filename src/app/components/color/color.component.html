@@ -1,8 +1,18 @@
-<br>
 <label for="colors">Colors</label>
-<br>
-<select [(ngModel)]="selectedColorId" name="colors" id="colors">
-  <option  *ngFor="let color of colors" value ="{{ color.colorId }}">{{color.name}}</option>
-</select>
-<br>
-<button routerLink = "/cars/color/{{selectedColorId}}" type="button" class="btn btn-info">Filter</button>
+<table>
+  <td>
+    <select [(ngModel)]="selectedColorId" name="colors" id="colors">
+      <option  *ngFor="let color of colors" value ="{{ color.colorId }}">{{color.name}}</option>
+    </select>
+  </td>
+  <td></td>
+  <td>
+    <button *ngIf="selectedColorId" routerLink = "/cars/color/{{selectedColorId}}" type="button" class="btn btn-info">Filter</button>
+  </td>
+  <td></td>
+  <td>
+    <button routerLink = "/colors/update" type="button" class="btn btn-info">Update</button>
+  </td>
+</table>
+
+

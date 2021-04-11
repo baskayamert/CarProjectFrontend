@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CarDto } from 'src/app/models/carDto';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -10,18 +12,26 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarUpdateComponent implements OnInit {
 
-  carUpdateForm : FormGroup;//as
+  currentCarDto:CarDto;
 
-  constructor(private formBuilder: FormBuilder, private toastrService:ToastrService, private carService:CarService) { }
+  carUpdateForm : FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private toastrService:ToastrService, 
+    private carService:CarService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params=>{
+      if(params["carId"]){
+        this.getCarDtoById(params["carId"]);
+      }
+    })
     this.createCarAddForm();
   }
 
   createCarAddForm(){
     this.carUpdateForm = this.formBuilder.group({
-      carId:["",Validators.required],
       brandId:["",Validators.required],
+      findexPoints:["",Validators.required],
       colorId:["",Validators.required],
       carName:["",Validators.required],
       modelYear:["",Validators.required],
@@ -45,4 +55,20 @@ export class CarUpdateComponent implements OnInit {
       this.toastrService.error("Please do not left missing parts!","Warning!");
     }
   } 
+
+  getCarDtoById(carId:number){
+    this.carService.getCarDtoById(carId).subscribe(response=>{
+      this.currentCarDto = response.data;
+      this.carUpdateForm.patchValue({
+        brandId:response.data.brandId,
+        findexPoints:response.data.findexPoints,
+        colorId:response.data.colorId,
+        carName:response.data.carName,
+        modelYear:response.data.modelYear,
+        dailyPrice:response.data.dailyPrice,
+        description:response.data.description
+      })
+
+    });
+  }
 }

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
+import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-car',
@@ -10,36 +12,38 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css']
 })
 export class CarComponent implements OnInit {
+  basePath: string = 'https://localhost:44349';
+  defaultPath: string = '/uploads/default.jpg';
+
   cars:Car[] = [];
   carDtos:CarDto[] = [];
-  currentCarDto:CarDto;
   filterText="";
  
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService, private activatedRoute:ActivatedRoute,
+    private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["brandId"]){
-        this.getCarDtosByBrand(params["brandId"]);
-      }else if(params["colorId"]){
-        this.getCarDtosByColor(params["colorId"]);
-      }else{
-        this.getCarDtos();
-      }
-     
-     
-    })
+     this.activatedRoute.params.subscribe(params=>{
+       if(params["brandId"]){
+         this.getCarDtosByBrand(params["brandId"]);
+       }else if(params["colorId"]){
+         this.getCarDtosByColor(params["colorId"]);
+       }else{
+         this.getCarDtos();
+       }
+     })
    
   }
 
   getCars(){
     this.carService.getCars().subscribe(response=>{
-      this.cars = response.data;    
+      this.cars = response.data;   
     })
   }
   getCarDtos(){
     this.carService.getCarDtos().subscribe(response=>{
       this.carDtos = response.data;
+      this.checkImagePaths();
     })
   }
   getCarDtosByBrand(brandId:number){
@@ -53,8 +57,20 @@ export class CarComponent implements OnInit {
       console.log(colorId);
     })
   }
-  setCurrentCarDto(carDto:CarDto){
-    this.currentCarDto = carDto;
+   
+     
+   getRole(){
+      return this.localStorageService.get("role") == "admin";
+   }
+
+  checkImagePaths(){
+    this.carDtos.forEach(c=>{
+      if(c.imagePath==null){
+        
+        c.imagePath = this.defaultPath;
+        console.log(c.imagePath)
+      } 
+    })
   }
   
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,Validators} from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CarAddComponent implements OnInit {
 
   carAddForm : FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private toastrService:ToastrService, private carService:CarService) { }
+  constructor(private formBuilder:FormBuilder, private toastrService:ToastrService, 
+    private carService:CarService,private carImageService:CarImageService) { }
 
   ngOnInit(): void {
     this.createCarAddForm();
@@ -21,11 +23,13 @@ export class CarAddComponent implements OnInit {
   createCarAddForm(){
     this.carAddForm = this.formBuilder.group({
       brandId:["",Validators.required],
+      findexPoints:["",Validators.required],
       colorId:["",Validators.required],
       carName:["",Validators.required],
       modelYear:["",Validators.required],
       dailyPrice:["",Validators.required],
-      description:["",Validators.required]
+      description:["",Validators.required],
+      //imagePath:[""]
     })
   }
 
@@ -34,6 +38,7 @@ export class CarAddComponent implements OnInit {
       let carModel = Object.assign({},this.carAddForm.value);
       this.carService.add(carModel).subscribe(response=>{
         this.toastrService.success(response.message,"Success!") 
+        //this.addImageToDataBase();
       },responseError=>{
         if(responseError.error.Errors.length>0){
           for (let i = 0; i < responseError.error.Errors.length; i++) {
@@ -46,4 +51,9 @@ export class CarAddComponent implements OnInit {
     }
     
   }
+  // addImageToDataBase(){
+  //   this.carImageService.add(this.carAddForm.value.imagePath).subscribe(response=>{
+  //     console.log(response);
+  //   })
+  // }
 }

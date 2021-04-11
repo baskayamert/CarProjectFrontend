@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CreditCard } from '../models/creditCard';
 import { PaymentInfo } from '../models/paymentInfo';
 import { ResponseModel } from '../models/responseModel';
 
@@ -12,9 +13,9 @@ export class PaymentService {
 
   constructor(private httpClient:HttpClient) { }
 
-  confirmPayment(paymentInfo : PaymentInfo):Observable<ResponseModel>{
+  confirmPayment(creditCard : CreditCard):Observable<ResponseModel>{
     let newPath = this.apiUrl + "payments/confirmpayment?paymentInfo=";
-    return this.httpClient.post<ResponseModel>(newPath,paymentInfo);
+    return this.httpClient.post<ResponseModel>(newPath,creditCard);
    
   }
 }

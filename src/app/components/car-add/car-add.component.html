@@ -5,18 +5,6 @@
         <div class="card-body">
           <form [formGroup]="carAddForm">
             <div class="mb-3">
-              <label for="carName">Car Name</label>
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="carName"
-                  formControlName="carName"
-                  class="form-control"
-                  placeholder="Car name"
-                />
-              </div>
-            </div>
-            <div class="mb-3">
               <label for="brandId">Brand Id</label>
               <div class="form-group">
                 <input
@@ -25,6 +13,18 @@
                   formControlName="brandId"
                   class="form-control"
                   placeholder="Brand id"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="findexPoints">Findex Points</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="findexPoints"
+                  formControlName="findexPoints"
+                  class="form-control"
+                  placeholder="Findex Points"
                 />
               </div>
             </div>
@@ -88,6 +88,13 @@
                   />
                 </div>
               </div>
+              <!-- <div class="mb-3">
+                <label for="carImage">CarImage</label>
+                <div class="form-group">
+                  <input name="carImage"formControlName="imagePath" id ="carImage"type="file" />
+                </div>
+              </div> -->
+              
           </form>
         </div>
         <div class="card-footer">
@@ -98,3 +105,4 @@
   </div>
   
 
+  

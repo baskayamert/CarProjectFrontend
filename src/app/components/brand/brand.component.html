@@ -1,7 +1,21 @@
 <label for="brands">Brands</label>
-<br>
-<select [(ngModel)]="selectedBrandId" name="brands" id="brands">
-  <option  *ngFor="let brand of brands" value="{{ brand.brandId }}">{{brand.name}}</option>
-</select>
-<br>
-<button routerLink = "/cars/brand/{{selectedBrandId}}" type="button" class="btn btn-info">Filter</button>
+<table>
+  <td>
+    <select [(ngModel)]="selectedBrandId" name="brands" id="brands">
+      <option  *ngFor="let brand of brands" value="{{ brand.brandId }}">{{brand.name}}</option>
+    </select>
+  </td>
+  <td></td>
+  <td>
+    <button *ngIf="selectedBrandId" routerLink = "/cars/brand/{{selectedBrandId}}" type="button" class="btn btn-info">Filter</button>
+
+  </td>
+
+  <td></td>
+  <td>
+    <button routerLink = "/brands/update" type="button" class="btn btn-info">Update</button>
+  </td>
+
+</table>
+
+
